@@ -1,0 +1,54 @@
+SELECT
+	u.date AS date,
+    SUM(u.j_count) AS joined_count,
+    SUM(u.l_count) AS left_count,
+    (
+		SELECT
+			SUM(dummy.j_count) - SUM(dummy.l_count)
+		FROM
+			(
+				SELECT
+					joined_date AS dummy_date,
+					1 AS j_count,
+					0 AS l_count
+				FROM
+					users
+				WHERE
+					joined_date IS NOT NULL
+				UNION ALL
+				SELECT
+					left_date AS date,
+					0 AS j_count,
+					1 AS l_count
+				FROM
+					users
+				WHERE
+					left_date IS NOT NULL
+			) dummy
+		WHERE
+			u.date >= dummy.dummy_date
+	) AS user_count
+FROM
+	(
+		SELECT
+			joined_date AS date,
+			1 AS j_count,
+			0 AS l_count
+		FROM
+			users
+		WHERE
+			joined_date IS NOT NULL
+		UNION ALL
+		SELECT
+			left_date AS date,
+			0 AS j_count,
+			1 AS l_count
+		FROM
+			users
+		WHERE
+			left_date IS NOT NULL
+	) u
+GROUP BY
+	date
+ORDER BY
+	date;
