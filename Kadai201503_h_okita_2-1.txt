@@ -1,8 +1,8 @@
 SELECT
 	e.uid AS event_id,
     e.event_name AS event_name,
-	dummy.uid AS schedule_id,
-    dummy.due_date AS due_date
+	temp.uid AS schedule_id,
+    temp.due_date AS due_date
 FROM
 	(
 		SELECT
@@ -16,10 +16,10 @@ FROM
 			event_id
 	) currenly_s
 	JOIN 
-		schedules dummy 
+		schedules temp 
     ON 
-		currenly_s.event_id = dummy.event_id AND
-        currenly_s.due_date = dummy.due_date
+		currenly_s.event_id = temp.event_id AND
+        currenly_s.due_date = temp.due_date
     JOIN 
 		events e 
 	ON 
