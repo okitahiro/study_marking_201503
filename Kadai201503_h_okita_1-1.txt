@@ -1,7 +1,7 @@
 SELECT
 	u.date AS date,
-    SUM(u.j_count) AS joined_count,
-    SUM(u.l_count) AS left_count
+	SUM(u.j_count) AS joined_count,
+	SUM(u.l_count) AS left_count
 FROM
 	(
 		SELECT

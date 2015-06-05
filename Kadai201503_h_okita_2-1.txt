@@ -1,13 +1,13 @@
 SELECT
 	e.uid AS event_id,
-    e.event_name AS event_name,
+	e.event_name AS event_name,
 	dummy.uid AS schedule_id,
-    dummy.due_date AS due_date
+	dummy.due_date AS due_date
 FROM
 	(
 		SELECT
 			event_id AS event_id,
-            MIN(due_date) AS due_date
+			MIN(due_date) AS due_date
 		FROM 
 			schedules
 		WHERE
@@ -19,17 +19,17 @@ FROM
 		schedules dummy 
     ON 
 		currenly_s.event_id = dummy.event_id AND
-        currenly_s.due_date = dummy.due_date
-    JOIN 
+		currenly_s.due_date = dummy.due_date
+	JOIN 
 		events e 
 	ON 
 		e.uid = currenly_s.event_id
 UNION
 SELECT
 	e.uid AS event_id,
-    e.event_name AS event_name,
-    NULL AS schedule_id,
-    NULL AS due_date
+	e.event_name AS event_name,
+	NULL AS schedule_id,
+	NULL AS due_date
 FROM
 	events e
 WHERE
