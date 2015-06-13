@@ -4,11 +4,11 @@ SELECT
     SUM(u.l_count) AS left_count,
     (
 		SELECT
-			SUM(dummy.j_count) - SUM(dummy.l_count)
+			SUM(temp.j_count) - SUM(temp.l_count)
 		FROM
 			(
 				SELECT
-					joined_date AS dummy_date,
+					joined_date AS temp_date,
 					1 AS j_count,
 					0 AS l_count
 				FROM
@@ -22,9 +22,9 @@ SELECT
 					users
 				WHERE
 					left_date IS NOT NULL
-			) dummy
+			) temp
 		WHERE
-			u.date >= dummy.dummy_date
+			u.date >= temp.temp_date
 	) AS user_count
 FROM
 	(

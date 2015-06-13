@@ -1,7 +1,7 @@
 SELECT
 	e.uid AS employee_id,
     e.employee_name AS employee_name,
-	dummy.section_name AS section_name,
+	temp.section_name AS section_name,
     currently_sh.max_start_date
 FROM
 	(
@@ -14,10 +14,10 @@ FROM
 			employee_id
 	) currently_sh
 	JOIN
-		section_histories dummy
+		section_histories temp
 	ON
-		currently_sh.employee_id = dummy.employee_id AND
-        currently_sh.max_start_date = dummy.start_date
+		currently_sh.employee_id = temp.employee_id AND
+        currently_sh.max_start_date = temp.start_date
 	JOIN
 		employees e 
 	ON currently_sh.employee_id = e.uid
