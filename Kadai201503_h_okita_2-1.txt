@@ -16,8 +16,8 @@ FROM
 			event_id
 	) currenly_s
 	JOIN 
-		schedules dummy 
-    ON 
+		schedules dummy
+	ON 
 		currenly_s.event_id = dummy.event_id AND
 		currenly_s.due_date = dummy.due_date
 	JOIN 
