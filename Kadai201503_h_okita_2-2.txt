@@ -1,13 +1,13 @@
 SELECT
 	e.uid AS employee_id,
-    e.employee_name AS employee_name,
+	e.employee_name AS employee_name,
 	temp.section_name AS section_name,
-    currently_sh.max_start_date
+	currently_sh.max_start_date
 FROM
 	(
 		SELECT
 			employee_id AS employee_id,
-            MAX(start_date) AS max_start_date
+			MAX(start_date) AS max_start_date
 		FROM
 			section_histories
 		GROUP BY
@@ -17,7 +17,7 @@ FROM
 		section_histories temp
 	ON
 		currently_sh.employee_id = temp.employee_id AND
-        currently_sh.max_start_date = temp.start_date
+		currently_sh.max_start_date = temp.start_date
 	JOIN
 		employees e 
 	ON currently_sh.employee_id = e.uid
