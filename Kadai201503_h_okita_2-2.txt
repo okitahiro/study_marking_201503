@@ -2,7 +2,7 @@ SELECT
 	e.uid AS employee_id,
 	e.employee_name AS employee_name,
 	temp.section_name AS section_name,
-	currently_sh.max_start_date
+	currently_sh.max_start_date AS start_date
 FROM
 	(
 		SELECT
